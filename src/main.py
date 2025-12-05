@@ -9,10 +9,10 @@ BAUDRATE = 4800
 # Initialize data list to store parsed data
 data_list = []
 
-try:
-    # Open serial port
-    ser = open_serial_port(SERIAL_PORT, BAUDRATE)
+# Open serial port
+ser = open_serial_port(SERIAL_PORT, BAUDRATE)
 
+try:
     # Continuously read from the serial port
     while True:
         if ser.in_waiting > 0:
