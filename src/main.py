@@ -3,7 +3,7 @@ from serial_read import open_serial_port, close_serial_port
 from nmea_convert import parse_nmea_sentence
 
 # Serial port configuration
-SERIAL_PORT = 'COM7'  # Update this to your serial port
+SERIAL_PORT = '/dev/ttymxc0'  # Update this to your serial port
 BAUDRATE = 4800
 
 # Initialize data list to store parsed data
