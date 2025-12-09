@@ -1,6 +1,7 @@
 import serial
 from serial_read import open_serial_port, close_serial_port
 from nmea_convert import parse_nmea_sentence
+from data_save import save_data
 
 # Serial port configuration
 SERIAL_PORT = '/dev/ttymxc3'  # Update this to your serial port
@@ -24,6 +25,8 @@ try:
                 parsed_data = parse_nmea_sentence(line)
                 data_list.append(parsed_data)
                 print(f"Parsed Data:\n{parsed_data}\n")
+                # Save parsed data
+                save_data(parsed_data.iloc[0].to_dict())
             except ValueError as e:
                 print(f"Error parsing sentence: {e}")
 

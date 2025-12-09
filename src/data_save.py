@@ -1,10 +1,14 @@
 import csv
+import pandas as pd
+from datetime import datetime
 
 """Module to save data to files."""
 
-def save_data(parsed_data, directory="data"):
+def save_data(parsed_data: pd.DataFrame, directory="data"):
     """Save parsed data to CSV files based on datetime."""
-    timestamp = parsed_data.get('Timestamp', None)
+    
+    timestamp = parsed_data.get('Timestamp', [None])[0]
+
     if timestamp is None:
         print("No timestamp found in data; cannot save.")
         return
@@ -22,12 +26,12 @@ def write_to_csv(filename, parsed_data):
             file_exists = True
     except FileNotFoundError:
         pass
-
+    
     with open(filename, 'a', newline='') as csvfile:
-        fieldnames = parsed_data.keys()
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
+        writer = csv.DictWriter(csvfile, fieldnames=parsed_data.keys())
+        
         if not file_exists:
             writer.writeheader()
-        writer.writerow(parsed_data)
-    print(f"Data saved to {filename}")
+        
+        writer.writerow({k: v for k, v in parsed_data.items()})
+        print(f"Data saved to {filename}.")
