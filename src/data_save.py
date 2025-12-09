@@ -7,7 +7,7 @@ from datetime import datetime
 def save_data(parsed_data: pd.DataFrame, directory="data"):
     """Save parsed data to CSV files based on datetime."""
     
-    timestamp = parsed_data.index[0] if not parsed_data.empty else None
+    timestamp = parsed_data.index[0]
 
     if timestamp is None:
         print("No timestamp found in data; cannot save.")
