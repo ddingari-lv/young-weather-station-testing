@@ -19,7 +19,19 @@ def save_data(parsed_data: pd.DataFrame, directory="data"):
     
     # Save data to CSV files by day
     date_str = timestamp.strftime("%Y-%m-%d")
-    filename = f"{directory}/data_{date_str}.csv"
+    filename = f"{directory}/data_{date_str}"
+    write_to_csv(filename, parsed_data)
+
+def write_wind_or_temp(filename, parsed_data):
+    """Check if parsed data is wind or temperature data and write to specific CSV."""
+    # Determine if data is wind or temperature based on keys
+    if "Temperature_unit" in parsed_data.keys():
+        filename += "_temp.csv"
+    elif "Wind_speed_units" in parsed_data.keys():
+        filename += "_wind.csv"
+    else:
+        print("Data type not recognized for specialized saving.")
+        return
     write_to_csv(filename, parsed_data)
 
 def write_to_csv(filename, parsed_data):
