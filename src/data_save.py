@@ -20,7 +20,7 @@ def save_data(parsed_data: pd.DataFrame, directory="data"):
     # Save data to CSV files by day
     date_str = timestamp.strftime("%Y-%m-%d")
     filename = f"{directory}/data_{date_str}"
-    write_to_csv(filename, parsed_data)
+    write_wind_or_temp(filename, parsed_data)
 
 def write_wind_or_temp(filename, parsed_data):
     """Check if parsed data is wind or temperature data and write to specific CSV."""
